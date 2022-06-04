@@ -6,7 +6,7 @@ export class Category extends React.Component {
 
     return (
       <section className='category container'>
-        <h2>{title}</h2>
+        <h2 className='title-section'>{title}</h2>
       </section>
     );
   }

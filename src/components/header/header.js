@@ -5,8 +5,23 @@ import logo from '../../assets/icons/logo.svg';
 import './header.scss';
 
 class Header extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      isClickCurrency: false,
+    };
+  }
+
+  setIsClickCurrency = () => {
+    this.setState((prevState) => {
+      return { isClickCurrency: !prevState.isClickCurrency };
+    });
+  };
+
   render() {
-    const { categories } = this.props;
+    const { categories, currencies, currentCurrency, setCurrentCurrency } =
+      this.props;
+    const { isClickCurrency } = this.state;
 
     return (
       <header className='header container'>
@@ -24,12 +39,31 @@ class Header extends React.Component {
             ))}
           </ul>
         </nav>
-        <NavLink className='header__logo' to='/'>
+        <NavLink className='header__logo' to={`category/${categories[0]}`}>
           <img src={logo} alt='logo'></img>
         </NavLink>
         <div className='header__other'>
-          <button className='header__currency'>$</button>
+          <button
+            className={
+              isClickCurrency ? 'header__currency active' : 'header__currency'
+            }
+            onClick={this.setIsClickCurrency}
+          >
+            {currentCurrency.symbol}
+          </button>
           <button className='header__cart'></button>
+
+          <ul className='header__currencies'>
+            {currencies.map((currency, idx) => (
+              <li
+                className='header__currencies-item'
+                key={idx}
+                onClick={() => setCurrentCurrency(currency)}
+              >
+                <button className='header__currencies-btn'>{`${currency.symbol} ${currency.label}`}</button>
+              </li>
+            ))}
+          </ul>
         </div>
       </header>
     );
