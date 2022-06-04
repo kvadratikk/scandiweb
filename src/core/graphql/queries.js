@@ -16,3 +16,24 @@ export const CURRENCIES = gql`
     }
   }
 `;
+
+export const PRODUCTS = gql`
+  query ($title: String!) {
+    category(input: { title: $title }) {
+      name
+      products {
+        id
+        name
+        inStock
+        gallery
+        prices {
+          currency {
+            label
+            symbol
+          }
+          amount
+        }
+      }
+    }
+  }
+`;

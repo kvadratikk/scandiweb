@@ -28,20 +28,11 @@ class App extends React.Component {
       query: CURRENCIES,
     });
 
-    this.setState(
-      {
-        categories: categoriesData.categories.map((category) => category.name),
-        currencies: currenciesData.currencies.map((currency) => {
-          return {
-            label: currency.label,
-            symbol: currency.symbol,
-          };
-        }),
-      },
-      () => {
-        this.setCurrentCurrency(this.state.currencies[0]);
-      }
-    );
+    this.setState({
+      categories: categoriesData.categories.map((category) => category.name),
+      currencies: currenciesData.currencies,
+      currentCurrency: currenciesData.currencies[0],
+    });
   };
 
   setCurrentCurrency = (currency) => {
@@ -53,7 +44,7 @@ class App extends React.Component {
 
     return (
       <ApolloProvider client={client}>
-        {categories.length && (
+        {(categories.length && (
           <BrowserRouter basename='/'>
             <Header
               categories={categories}
@@ -67,7 +58,12 @@ class App extends React.Component {
                   <Route
                     key={idx}
                     path={`category/${category}`}
-                    element={<Category title={category} />}
+                    element={
+                      <Category
+                        title={category}
+                        currentCurrency={currentCurrency}
+                      />
+                    }
                   />
                 ))}
                 <Route
@@ -83,7 +79,8 @@ class App extends React.Component {
               </Routes>
             </main>
           </BrowserRouter>
-        )}
+        )) ||
+          null}
       </ApolloProvider>
     );
   }

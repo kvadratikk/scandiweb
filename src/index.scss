@@ -73,6 +73,8 @@ h5,
 h6 {
   margin: 0;
   font-weight: normal;
+  font-size: 18px;
+  line-height: 28.8px;
 }
 
 a {
@@ -90,15 +92,11 @@ button {
 }
 
 section {
-  padding-top: 80px;
+  padding-top: 73px;
 }
 
 .title-section {
   font-size: 42px;
   line-height: 67.2px;
-  padding-bottom: 103px;
-}
-
-.title-section::first-letter {
-  text-transform: uppercase;
+  text-transform: capitalize;
 }

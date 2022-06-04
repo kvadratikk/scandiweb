@@ -53,17 +53,22 @@ class Header extends React.Component {
           </button>
           <button className='header__cart'></button>
 
-          <ul className='header__currencies'>
-            {currencies.map((currency, idx) => (
-              <li
-                className='header__currencies-item'
-                key={idx}
-                onClick={() => setCurrentCurrency(currency)}
-              >
-                <button className='header__currencies-btn'>{`${currency.symbol} ${currency.label}`}</button>
-              </li>
-            ))}
-          </ul>
+          {isClickCurrency && (
+            <ul className='header__currencies'>
+              {currencies.map((currency, idx) => (
+                <li
+                  className='header__currencies-item'
+                  key={idx}
+                  onClick={() => {
+                    setCurrentCurrency(currency);
+                    this.setIsClickCurrency();
+                  }}
+                >
+                  <button className='header__currencies-btn'>{`${currency.symbol} ${currency.label}`}</button>
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
       </header>
     );
