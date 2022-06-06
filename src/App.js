@@ -3,7 +3,9 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { ApolloProvider } from '@apollo/client';
 
 import Header from './components/header/Header';
+import { NotFound } from './pages/NotFound';
 import { Category } from './pages/Category';
+import { Details } from './pages/Details';
 import './App.scss';
 
 import client from './core/graphql/client';
@@ -15,7 +17,7 @@ class App extends React.Component {
     this.state = {
       categories: [],
       currencies: [],
-      currentCurrency: {},
+      currentCurrency: JSON.parse(localStorage.getItem('currency')) || null,
     };
   }
 
@@ -31,12 +33,15 @@ class App extends React.Component {
     this.setState({
       categories: categoriesData.categories.map((category) => category.name),
       currencies: currenciesData.currencies,
-      currentCurrency: currenciesData.currencies[0],
+      currentCurrency: this.state.currentCurrency
+        ? this.state.currentCurrency
+        : currenciesData.currencies[0],
     });
   };
 
   setCurrentCurrency = (currency) => {
     this.setState({ currentCurrency: currency });
+    localStorage.setItem('currency', JSON.stringify(currency));
   };
 
   render() {
@@ -57,6 +62,13 @@ class App extends React.Component {
                 {categories.map((category, idx) => (
                   <Route
                     key={idx}
+                    path={`category/${category}/:id`}
+                    element={<Details currentCurrency={currentCurrency} />}
+                  />
+                ))}
+                {categories.map((category, idx) => (
+                  <Route
+                    key={category[idx]}
                     path={`category/${category}`}
                     element={
                       <Category
@@ -72,10 +84,7 @@ class App extends React.Component {
                     <Navigate replace to={`category/${categories[0]}`} />
                   }
                 />
-                <Route
-                  path='*'
-                  element={<p className='container'>Not Found</p>}
-                />
+                <Route path='*' element={<NotFound />} />
               </Routes>
             </main>
           </BrowserRouter>

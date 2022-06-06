@@ -6,9 +6,13 @@
 }
 
 .product {
+  box-sizing: border-box;
   padding: 16px;
+  font-size: 18px;
   background-color: #fff;
   cursor: pointer;
+  height: 100%;
+  transition: all 0.25s ease-out;
 
   &.out-of-stock {
     color: #8d8f9a;

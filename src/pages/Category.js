@@ -19,13 +19,8 @@ export class Category extends React.Component {
   };
 
   componentDidUpdate = async (prevProps) => {
-    const { title, currentCurrency } = this.props;
-
-    if (
-      title !== prevProps.title ||
-      currentCurrency.symbol !== prevProps.currentCurrency.symbol
-    )
-      await this.requestProducts();
+    const { title } = this.props;
+    if (title !== prevProps.title) await this.requestProducts();
   };
 
   requestProducts = async () => {
@@ -41,23 +36,21 @@ export class Category extends React.Component {
       products: products.map((product) => {
         return {
           ...product,
-          prices: product.prices.filter(
-            (price) =>
-              price.currency.symbol === this.props.currentCurrency.symbol
-          )[0],
+          gallery: product.gallery[0],
         };
       }),
     });
   };
 
   render() {
+    const { currentCurrency } = this.props;
     const { products, name } = this.state;
 
     return (
       <section className='category container'>
         <h2 className='title-section'>{name}</h2>
 
-        <Products products={products} />
+        <Products products={products} currentCurrency={currentCurrency} />
       </section>
     );
   }

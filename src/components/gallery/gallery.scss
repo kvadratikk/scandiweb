@@ -1,0 +1,25 @@
+.gallery {
+  display: flex;
+  gap: 40px;
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  &__item {
+    cursor: pointer;
+  }
+
+  &__current {
+    width: 610px;
+    max-height: 511px;
+    object-fit: contain;
+  }
+
+  &__img {
+    max-width: 80px;
+    display: block;
+  }
+}

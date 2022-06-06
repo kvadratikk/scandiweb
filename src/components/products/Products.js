@@ -4,12 +4,16 @@ import './products.scss';
 
 class Products extends React.Component {
   render() {
-    const { products } = this.props;
+    const { products, currentCurrency } = this.props;
 
     return (
       <ul className='products'>
         {products.map((product) => (
-          <Product product={product} key={product.id} />
+          <Product
+            product={product}
+            key={product.id}
+            currentCurrency={currentCurrency}
+          />
         ))}
       </ul>
     );

@@ -13,6 +13,7 @@
   &__nav-link {
     padding: 0 16px 30px 16px;
     line-height: 19.2px;
+    transition: all 0.25s ease-out;
   }
 
   &__nav-link:hover {
