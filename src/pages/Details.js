@@ -29,16 +29,13 @@ export class Details extends React.Component {
   };
 
   render() {
-    const { currentCurrency } = this.props;
     const { product, isNotFound } = this.state;
 
     return (
       <>
         {(isNotFound && <NotFound />) || (
           <section className='details container'>
-            {!isNotFound && product && (
-              <Card product={product} currentCurrency={currentCurrency} />
-            )}
+            {!isNotFound && product && <Card product={product} />}
           </section>
         )}
       </>

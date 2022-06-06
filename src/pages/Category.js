@@ -5,7 +5,7 @@ import { PRODUCTS } from '../core/graphql/queries';
 
 import Products from '../components/products/Products';
 
-export class Category extends React.Component {
+class Category extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -43,15 +43,16 @@ export class Category extends React.Component {
   };
 
   render() {
-    const { currentCurrency } = this.props;
     const { products, name } = this.state;
 
     return (
       <section className='category container'>
         <h2 className='title-section'>{name}</h2>
 
-        <Products products={products} currentCurrency={currentCurrency} />
+        <Products products={products} />
       </section>
     );
   }
 }
+
+export default Category;

@@ -1,8 +1,11 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import logo from '../../assets/icons/logo.svg';
 import './header.scss';
+
+import { setCurrency } from '../../core/redux/appSlice';
 
 class Header extends React.Component {
   constructor() {
@@ -19,8 +22,7 @@ class Header extends React.Component {
   };
 
   render() {
-    const { categories, currencies, currentCurrency, setCurrentCurrency } =
-      this.props;
+    const { categories, currencies, currency, setCurrency } = this.props;
     const { isClickCurrency } = this.state;
 
     return (
@@ -49,7 +51,7 @@ class Header extends React.Component {
             }
             onClick={this.setIsClickCurrency}
           >
-            {currentCurrency.symbol}
+            {currency.symbol}
           </button>
           <button className='header__cart'></button>
 
@@ -60,7 +62,7 @@ class Header extends React.Component {
                   className='header__currencies-item'
                   key={idx}
                   onClick={() => {
-                    setCurrentCurrency(currency);
+                    setCurrency(currency);
                     this.setIsClickCurrency();
                   }}
                 >
@@ -75,4 +77,9 @@ class Header extends React.Component {
   }
 }
 
-export default Header;
+const props = (state) => ({
+  currency: state.currency,
+  currencies: state.currencies,
+});
+
+export default connect(props, { setCurrency })(Header);

@@ -1,5 +1,6 @@
 import React from 'react';
 import parse from 'html-react-parser';
+import { connect } from 'react-redux';
 import './card.scss';
 
 import Gallery from '../gallery/Gallery';
@@ -9,7 +10,7 @@ import { sortArr, findPrice } from '../../core/helpers/functions';
 
 class Card extends React.Component {
   render() {
-    const { symbol } = this.props.currentCurrency;
+    const { symbol } = this.props.currency;
     const { name, gallery, brand, attributes, prices, description } =
       this.props.product;
 
@@ -46,4 +47,8 @@ class Card extends React.Component {
   }
 }
 
-export default Card;
+const props = (state) => ({
+  currency: state.currency,
+});
+
+export default connect(props)(Card);
