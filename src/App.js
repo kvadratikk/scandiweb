@@ -4,9 +4,10 @@ import { ApolloProvider } from '@apollo/client';
 import { connect } from 'react-redux';
 
 import Header from './components/header/Header';
-import { NotFound } from './pages/NotFound';
+import NotFound from './pages/NotFound';
 import Category from './pages/Category';
-import { Details } from './pages/Details';
+import Details from './pages/Details';
+import Cart from './pages/Cart';
 import './App.scss';
 
 import client from './core/graphql/client';
@@ -71,6 +72,7 @@ class App extends React.Component {
                     <Navigate replace to={`category/${categories[0]}`} />
                   }
                 />
+                <Route path='cart' element={<Cart />} />
                 <Route path='*' element={<NotFound />} />
               </Routes>
             </main>

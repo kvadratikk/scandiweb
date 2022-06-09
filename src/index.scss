@@ -82,7 +82,7 @@ label,
 button {
   margin: 0;
   font-weight: normal;
-  font-size: 18px;
+  font-size: inherit;
   line-height: 28.8px;
 }
 
@@ -101,7 +101,7 @@ button {
 }
 
 section {
-  padding-top: 73px;
+  padding: 73px 0;
 }
 
 .title-section {
@@ -114,6 +114,14 @@ section {
   line-height: 18px;
   font-family: 'RobotoCondenced700';
   text-transform: uppercase;
+}
+
+.title-section--v2 {
+  font-family: 'Raleway700';
+  font-size: 32px;
+  line-height: 40px;
+  text-transform: uppercase;
+  margin-bottom: 55px;
 }
 
 .details {

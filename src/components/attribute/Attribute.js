@@ -2,16 +2,8 @@ import React from 'react';
 import './attribute.scss';
 
 class Attribute extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      activeValue: '',
-    };
-  }
-
   render() {
-    const { attribute } = this.props;
-    const { activeValue } = this.state;
+    const { attribute, setSelectedAttributes, selectedAttributes } = this.props;
 
     return (
       <li className='attribute'>
@@ -23,7 +15,14 @@ class Attribute extends React.Component {
             <label
               className={`attribute__item ${
                 (attribute.type === 'swatch' && 'swatch') || ''
-              } ${(activeValue === item.displayValue && 'active') || ''}`}
+              } ${
+                (selectedAttributes.find(
+                  (selectedAttribute) =>
+                    selectedAttribute[attribute.id] === item.displayValue
+                ) &&
+                  'active') ||
+                ''
+              } ${setSelectedAttributes ? 'details-item' : 'cart-item'}`}
               key={item.id}
               style={
                 (attribute.type === 'swatch' && {
@@ -31,9 +30,6 @@ class Attribute extends React.Component {
                 }) ||
                 null
               }
-              onChange={() => {
-                this.setState({ activeValue: item.displayValue });
-              }}
             >
               {attribute.type === 'swatch' ? '' : item.value}
               <input
@@ -41,6 +37,10 @@ class Attribute extends React.Component {
                 type='radio'
                 value={item.displayValue}
                 name={attribute.id}
+                onClick={() => {
+                  setSelectedAttributes &&
+                    setSelectedAttributes(attribute.id, item.displayValue);
+                }}
               />
             </label>
           ))}

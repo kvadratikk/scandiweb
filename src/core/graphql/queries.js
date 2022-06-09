@@ -26,6 +26,7 @@ export const PRODUCTS = gql`
         name
         inStock
         gallery
+        brand
         prices {
           currency {
             label
@@ -41,10 +42,12 @@ export const PRODUCTS = gql`
 export const DETAILS = gql`
   query ($id: String!) {
     product(id: $id) {
+      id
       name
       gallery
       description
       brand
+      inStock
       prices {
         currency {
           symbol

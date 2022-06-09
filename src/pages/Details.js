@@ -4,9 +4,9 @@ import client from '../core/graphql/client';
 import { DETAILS } from '../core/graphql/queries';
 
 import Card from '../components/card/Card';
-import { NotFound } from '../pages/NotFound';
+import NotFound from '../pages/NotFound';
 
-export class Details extends React.Component {
+class Details extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -35,10 +35,14 @@ export class Details extends React.Component {
       <>
         {(isNotFound && <NotFound />) || (
           <section className='details container'>
-            {!isNotFound && product && <Card product={product} />}
+            {!isNotFound && product && (
+              <Card title='details' product={product} />
+            )}
           </section>
         )}
       </>
     );
   }
 }
+
+export default Details;

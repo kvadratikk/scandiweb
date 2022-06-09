@@ -13,7 +13,6 @@ input[type='radio'] {
   }
 
   &__item {
-    cursor: pointer;
     width: 63px;
     height: 45px;
     border: 1px solid var(--c-text);
@@ -26,7 +25,11 @@ input[type='radio'] {
     position: relative;
   }
 
-  &__item:hover,
+  &__item.details-item {
+    cursor: pointer;
+  }
+
+  &__item.details-item:hover,
   &__item.active {
     background-color: var(--c-text);
     color: #fff;
@@ -44,7 +47,7 @@ input[type='radio'] {
     box-shadow: 0 0 0 1px hsl(0, 0%, 85%);
   }
 
-  &__item.swatch:hover,
+  &__item.details-item.swatch:hover,
   &__item.swatch.active {
     box-shadow: 0 0 0 1px var(--c-primary);
   }
