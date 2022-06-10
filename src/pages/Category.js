@@ -10,12 +10,18 @@ class Category extends React.Component {
     super();
     this.state = {
       name: '',
+      amount: 6,
       products: [],
     };
   }
 
   componentDidMount = async () => {
     await this.requestProducts();
+    document.addEventListener('scroll', this.scroll);
+  };
+
+  componentWillUnmount = () => {
+    document.removeEventListener('scroll', this.scroll);
   };
 
   componentDidUpdate = async (prevProps) => {
@@ -33,23 +39,32 @@ class Category extends React.Component {
 
     this.setState({
       name,
-      products: products.map((product) => {
-        return {
-          ...product,
-          gallery: product.gallery[0],
-        };
-      }),
+      products,
     });
   };
 
+  scroll = () => {
+    const { products, amount } = this.state;
+
+    const height = document.body.offsetHeight;
+    const screenHeight = window.innerHeight;
+    const scrolled = window.scrollY;
+    const threshold = height - screenHeight / 6;
+    const position = scrolled + screenHeight;
+
+    if (position >= threshold && amount <= products.length) {
+      this.setState({ amount: amount + 6 });
+    }
+  };
+
   render() {
-    const { products, name } = this.state;
+    const { products, name, amount } = this.state;
 
     return (
       <section className='category container'>
         <h2 className='title-section'>{name}</h2>
 
-        <Products products={products} />
+        <Products products={products.slice(0, amount)} />
       </section>
     );
   }

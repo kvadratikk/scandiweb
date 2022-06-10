@@ -26,6 +26,7 @@ export const PRODUCTS = gql`
         name
         inStock
         gallery
+        description
         brand
         prices {
           currency {
@@ -33,6 +34,16 @@ export const PRODUCTS = gql`
             symbol
           }
           amount
+        }
+        attributes {
+          id
+          name
+          type
+          items {
+            id
+            value
+            displayValue
+          }
         }
       }
     }

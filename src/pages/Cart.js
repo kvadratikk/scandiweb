@@ -1,17 +1,29 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import CartProducts from '../components/cartProducts/CartProducts';
+import Card from '../components/card/Card';
+import { order } from '../core/redux/appSlice';
+import { setCardKey, sumPrice, sumItems } from '../core/helpers/functions';
 
 class Cart extends React.Component {
   render() {
-    const { cart, currency } = this.props;
+    const { cart, currency, order } = this.props;
 
     return (
       <section className='cart container'>
         <h2 className='title-section--v2'>Cart</h2>
 
-        <CartProducts />
+        <ul className='cart__list'>
+          {(cart.length &&
+            cart.map((cartProduct) => (
+              <Card
+                title='cart'
+                key={setCardKey(cartProduct)}
+                product={cartProduct}
+              />
+            ))) ||
+            null}
+        </ul>
 
         <div className='cart__order'>
           <div className='cart__result'>
@@ -19,37 +31,23 @@ class Cart extends React.Component {
               Tax 21%:{' '}
               <span>
                 {currency.symbol}
-                {(cart.reduce(
-                  (a, b) =>
-                    a +
-                    b.prices.find(
-                      (price) => price.currency.symbol === currency.symbol
-                    ).amount,
-                  0
-                ) /
-                  100) *
-                  21}
+                {((sumPrice(cart, currency.symbol) / 100) * 21).toFixed(2)}
               </span>
             </p>
             <p>
-              Quantity: <span>{cart.reduce((a, b) => a + b.amount, 0)}</span>
+              Quantity: <span>{sumItems(cart)}</span>
             </p>
             <p>
               Total:{' '}
               <span>
                 {currency.symbol}
-                {cart.reduce(
-                  (a, b) =>
-                    a +
-                    b.prices.find(
-                      (price) => price.currency.symbol === currency.symbol
-                    ).amount,
-                  0
-                )}
+                {sumPrice(cart, currency.symbol)}
               </span>
             </p>
           </div>
-          <button className='cart__submit'>order</button>
+          <button className='cart__submit' onClick={() => order()}>
+            order
+          </button>
         </div>
       </section>
     );
@@ -61,4 +59,4 @@ const props = (state) => ({
   currency: state.currency,
 });
 
-export default connect(props)(Cart);
+export default connect(props, { order })(Cart);

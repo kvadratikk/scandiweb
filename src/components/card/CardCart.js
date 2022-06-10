@@ -61,7 +61,8 @@ class CardCart extends React.Component {
           <p className='card__brand cart__brand'>{brand}</p>
           <p className='card__price'>{`${currency.symbol}${findPrice(
             prices,
-            currency.symbol
+            currency.symbol,
+            amount
           )}`}</p>
           {(attributes.length && (
             <ul className='card__attributes cart__attributes'>
@@ -86,16 +87,12 @@ class CardCart extends React.Component {
             <button
               className='cart__plus'
               onClick={() => increaseAmount({ id, selectedAttributes })}
-            >
-              +
-            </button>
+            ></button>
             {amount}
             <button
               className='cart__minus'
               onClick={() => decreaseAmount({ id, selectedAttributes })}
-            >
-              -
-            </button>
+            ></button>
           </div>
           <img className='cart__img' src={gallery[currentImg]} alt='product' />
           {gallery.length > 1 && (

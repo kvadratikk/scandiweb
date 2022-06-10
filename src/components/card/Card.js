@@ -3,6 +3,7 @@ import './card.scss';
 
 import CardDetails from './CardDetails';
 import CardCart from './CardCart';
+import CardMini from './CardMini';
 
 class Card extends React.Component {
   render() {
@@ -14,7 +15,9 @@ class Card extends React.Component {
           <CardDetails product={product} />
         ) : title === 'cart' ? (
           <CardCart product={product} />
-        ) : null}
+        ) : (
+          <CardMini product={product} />
+        )}
       </>
     );
   }

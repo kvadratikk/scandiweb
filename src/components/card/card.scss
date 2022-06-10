@@ -43,20 +43,14 @@
     padding: 16px 93.5px;
     transition: all 0.25s ease-out;
     margin-bottom: 40px;
+    border: 1px solid var(--c-primary);
   }
 
   &__order:hover {
-    opacity: 0.8;
+    color: #000;
+    background-color: #fff;
+    border: 1px solid #000;
   }
-}
-
-button:disabled {
-  opacity: 0.5;
-  cursor: inherit;
-}
-
-button:disabled:hover {
-  opacity: 0.5;
 }
 
 .cart {
@@ -130,6 +124,56 @@ button:disabled:hover {
     width: 45px;
     height: 45px;
     border: 1px solid var(--c-text);
+    transition: 0.25s all ease-out;
+  }
+
+  &__amount > button:hover {
+    color: #fff;
+    background-color: var(--c-primary);
+    border: 1px solid var(--c-primary);
+  }
+
+  &__amount > button:hover::after,
+  &__amount > button:hover::before {
+    background-color: #fff;
+  }
+
+  &__plus,
+  &__minus {
+    position: relative;
+  }
+
+  &__plus::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 2px;
+    height: 15px;
+    background-color: #000;
+  }
+
+  &__plus::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 15px;
+    height: 2px;
+    background-color: #000;
+  }
+
+  &__minus::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 15px;
+    height: 2px;
+    background-color: #000;
   }
 
   &__order {
@@ -158,9 +202,12 @@ button:disabled:hover {
     color: #fff;
     text-transform: uppercase;
     transition: 0.25s ease-out;
+    border: 1px solid var(--c-primary);
   }
 
   &__submit:hover {
-    opacity: 0.8;
+    color: #000;
+    background-color: #fff;
+    border: 1px solid #000;
   }
 }

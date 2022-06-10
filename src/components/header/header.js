@@ -5,7 +5,9 @@ import { connect } from 'react-redux';
 import logo from '../../assets/icons/logo.svg';
 import './header.scss';
 
-import { setCurrency } from '../../core/redux/appSlice';
+import Currency from '../currency/Currency';
+import { setIsClickCart } from '../../core/redux/appSlice';
+import { sumItems } from '../../core/helpers/functions';
 
 class Header extends React.Component {
   constructor() {
@@ -15,14 +17,38 @@ class Header extends React.Component {
     };
   }
 
-  setIsClickCurrency = () => {
-    this.setState((prevState) => {
-      return { isClickCurrency: !prevState.isClickCurrency };
+  componentDidMount() {
+    document.addEventListener('mousedown', (e) => {
+      for (let element in this.props.elements) {
+        if (
+          this.props.elements[element].current &&
+          this.props.elements[element].current.contains(e.target)
+        )
+          return;
+      }
+
+      this.setIsClickCurrency(false);
+      this.props.setIsClickCart(false);
     });
+  }
+
+  setIsClickCurrency = (value) => {
+    this.setState({
+      isClickCurrency: value,
+    });
+    this.props.setIsClickCart(false);
   };
 
   render() {
-    const { categories, currencies, currency, setCurrency } = this.props;
+    const {
+      categories,
+      currencies,
+      currency,
+      isClickCart,
+      setIsClickCart,
+      elements,
+      cart,
+    } = this.props;
     const { isClickCurrency } = this.state;
 
     return (
@@ -41,33 +67,42 @@ class Header extends React.Component {
             ))}
           </ul>
         </nav>
+
         <NavLink className='header__logo' to={`category/${categories[0]}`}>
           <img src={logo} alt='logo'></img>
         </NavLink>
+
         <div className='header__other'>
           <button
+            ref={elements.btn}
             className={
               isClickCurrency ? 'header__currency active' : 'header__currency'
             }
-            onClick={this.setIsClickCurrency}
+            onClick={() => {
+              this.setIsClickCurrency(!isClickCurrency);
+            }}
           >
             {currency.symbol}
           </button>
-          <button className='header__cart'></button>
+          <button
+            className='header__cart'
+            ref={elements.cart}
+            onClick={() => {
+              this.setIsClickCurrency(false);
+              setIsClickCart(!isClickCart);
+            }}
+          >
+            <span className='header__total'>{sumItems(cart)}</span>
+          </button>
 
           {isClickCurrency && (
-            <ul className='header__currencies'>
+            <ul className='header__currencies' ref={elements.currencies}>
               {currencies.map((currency, idx) => (
-                <li
-                  className='header__currencies-item'
+                <Currency
+                  currency={currency}
                   key={idx}
-                  onClick={() => {
-                    setCurrency(currency);
-                    this.setIsClickCurrency();
-                  }}
-                >
-                  <button className='header__currencies-btn'>{`${currency.symbol} ${currency.label}`}</button>
-                </li>
+                  setIsClickCurrency={this.setIsClickCurrency}
+                />
               ))}
             </ul>
           )}
@@ -78,8 +113,11 @@ class Header extends React.Component {
 }
 
 const props = (state) => ({
+  cart: state.cart,
   currency: state.currency,
   currencies: state.currencies,
+  categories: state.categories,
+  isClickCart: state.isClickCart,
 });
 
-export default connect(props, { setCurrency })(Header);
+export default connect(props, { setIsClickCart })(Header);

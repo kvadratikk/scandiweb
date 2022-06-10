@@ -52,3 +52,24 @@ input[type='radio'] {
     box-shadow: 0 0 0 1px var(--c-primary);
   }
 }
+
+.attribute-mini {
+  font-family: 'Raleway400';
+  font-size: 14px;
+  line-height: 16px;
+
+  &__items {
+    gap: 8px;
+  }
+
+  &__item {
+    width: 45px;
+    height: 45px;
+    line-height: 22.4px;
+  }
+
+  &__item.swatch {
+    width: 20px;
+    height: 20px;
+  }
+}

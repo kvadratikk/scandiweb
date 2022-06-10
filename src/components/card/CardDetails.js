@@ -74,8 +74,6 @@ class CardDetails extends React.Component {
         amount: 1,
       });
     }
-
-    this.setAttributes();
   };
 
   render() {
@@ -110,7 +108,8 @@ class CardDetails extends React.Component {
           <h4 className='card__price-title title-attribute'>price:</h4>
           <p className='card__price'>{`${currency.symbol}${findPrice(
             prices,
-            currency.symbol
+            currency.symbol,
+            1
           )}`}</p>
           {inStock && (
             <button className='card__order' type='submit'>

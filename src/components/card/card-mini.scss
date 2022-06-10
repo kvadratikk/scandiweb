@@ -1,0 +1,141 @@
+.cart-modal {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 15;
+  background-color: #fff;
+  font-size: 16px;
+  line-height: 25.6px;
+  font-family: serif;
+  padding: 32px 16px;
+  min-width: 410px;
+  box-sizing: border-box;
+  overflow-y: auto;
+  max-height: 100%;
+
+  &::-webkit-scrollbar {
+    background-color: #fff;
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--c-text);
+    border-radius: 9em;
+  }
+
+  &__wrapper {
+    position: absolute;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    margin-bottom: 40px;
+  }
+
+  &__title {
+    font-family: 'Raleway700';
+    margin-bottom: 32px;
+  }
+
+  &__title > span {
+    font-family: 'Raleway500';
+  }
+
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    min-height: 190px;
+    height: 100%;
+  }
+
+  &__name {
+    font-family: 'Raleway300';
+    margin-bottom: 4px;
+  }
+
+  &__brand {
+    font-family: 'Raleway300';
+    margin-bottom: 8px;
+  }
+
+  &__price {
+    font-family: 'Raleway500';
+    margin-bottom: 8px;
+  }
+
+  &__other {
+    max-height: 190px;
+    gap: 8px;
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  &__amount {
+    font-size: 16px;
+    line-height: 25.6px;
+  }
+
+  &__amount > button {
+    width: 24px;
+    height: 24px;
+  }
+
+  &__plus::before {
+    height: 8px;
+  }
+
+  &__plus::after {
+    width: 8px;
+  }
+
+  &__minus::after {
+    width: 8px;
+  }
+
+  &__img {
+    width: 121px;
+  }
+
+  &__price {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Raleway700';
+    margin-bottom: 8px;
+  }
+
+  &__buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  &__buttons > &__button {
+    text-align: center;
+    flex: 1;
+    color: #fff;
+    background-color: var(--c-primary);
+    font-family: 'Raleway600';
+    text-transform: uppercase;
+    padding: 13px 0;
+    border: 1px solid var(--c-primary);
+    transition: all 0.25s ease-out;
+    min-width: 100px;
+  }
+
+  &__button:hover {
+    color: #000;
+    background-color: #fff;
+    border: 1px solid #000;
+  }
+}

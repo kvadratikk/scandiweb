@@ -10,7 +10,6 @@
   padding: 16px;
   font-size: 18px;
   background-color: #fff;
-  cursor: pointer;
   height: 100%;
   transition: all 0.25s ease-out;
 
@@ -52,13 +51,40 @@
 
   &__name {
     font-family: 'Raleway300';
+    position: relative;
   }
 
   &__price {
     font-family: 'Raleway500';
   }
+
+  &__cart {
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
+    width: 52px;
+    height: 52px;
+    background-color: var(--c-primary);
+    background-image: url('../../assets/icons/cart-white.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 50%;
+    text-align: center;
+    transition: all 0.25s ease-out;
+  }
+
+  &__cart:hover {
+    transform: scale(1.1);
+  }
 }
 
 .product:hover {
   filter: drop-shadow(0px 4px 35px rgba(168, 172, 176, 0.19));
+}
+
+.product:hover .product__cart {
+  opacity: 1;
+  visibility: visible;
 }

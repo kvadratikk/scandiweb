@@ -6,6 +6,18 @@
     display: flex;
     flex-direction: column;
     gap: 40px;
+    max-height: 511px;
+    overflow-y: auto;
+  }
+
+  &__list::-webkit-scrollbar {
+    background-color: #fff;
+    width: 8px;
+  }
+
+  &__list::-webkit-scrollbar-thumb {
+    background-color: var(--c-text);
+    border-radius: 9em;
   }
 
   &__item {
