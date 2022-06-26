@@ -9,6 +9,7 @@
     gap: 40px;
     max-height: 511px;
     overflow-y: auto;
+    overflow-x: hidden;
   }
 
   &__list::-webkit-scrollbar {

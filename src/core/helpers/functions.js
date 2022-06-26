@@ -10,9 +10,9 @@ export const sortArr = (a, b, key) => {
 };
 
 export const findPrice = (prices, symbol, amount) => {
-  return (
-    prices.find((price) => price.currency.symbol === symbol).amount * amount
-  ).toFixed(2);
+  return prices
+    .find((price) => price.currency.symbol === symbol)
+    .amount.toFixed(2);
 };
 
 export const sumItems = (cart) => {
