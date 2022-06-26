@@ -1,5 +1,6 @@
 .gallery {
   display: flex;
+  align-items: flex-start;
   gap: 40px;
 
   &__list {
@@ -33,5 +34,25 @@
   &__img {
     max-width: 80px;
     display: block;
+  }
+
+  &__img-wrapper.out-of-stock {
+    position: relative;
+    color: #8d8f9a;
+
+    &::after {
+      content: 'out of stock';
+      text-transform: uppercase;
+      line-height: 38.4px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 24px;
+    }
+
+    & > img {
+      opacity: 0.5;
+    }
   }
 }

@@ -84,7 +84,7 @@ class CardDetails extends React.Component {
 
     return (
       <div className='card'>
-        <Gallery gallery={gallery} />
+        <Gallery gallery={gallery} inStock={inStock} />
         <form className='card__info' onSubmit={this.handleForm}>
           <h3 className='card__name'>{name}</h3>
           <p className='card__brand'>{brand}</p>
