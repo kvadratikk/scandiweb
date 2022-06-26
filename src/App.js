@@ -41,6 +41,14 @@ class App extends React.Component {
     if (!currency) setCurrency(currenciesData.currencies[0]);
   };
 
+  componentDidUpdate() {
+    if (this.props.isClickCart) {
+      document.body.style.overflowY = 'hidden';
+    } else {
+      document.body.style.overflowY = 'visible';
+    }
+  }
+
   render() {
     const { categories } = this.props;
 
@@ -64,6 +72,7 @@ class App extends React.Component {
 const props = (state) => ({
   currency: state.currency,
   categories: state.categories,
+  isClickCart: state.isClickCart,
 });
 
 export default connect(props, { setCurrency, setCurrencies, setCategories })(

@@ -7,11 +7,11 @@
   font-size: 16px;
   line-height: 25.6px;
   font-family: serif;
-  padding: 32px 16px;
+  padding: 32px 16px 0 16px;
   min-width: 410px;
   box-sizing: border-box;
   overflow-y: auto;
-  max-height: 100%;
+  max-height: 700px;
 
   &::-webkit-scrollbar {
     background-color: #fff;
@@ -66,8 +66,10 @@
   }
 
   &__price {
-    font-family: 'Raleway500';
-    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Raleway700';
+    margin-bottom: 30px;
   }
 
   &__other {
@@ -107,17 +109,14 @@
     width: 121px;
   }
 
-  &__price {
-    display: flex;
-    justify-content: space-between;
-    font-family: 'Raleway700';
-    margin-bottom: 8px;
-  }
-
   &__buttons {
     display: flex;
     justify-content: space-between;
     gap: 12px;
+    position: sticky;
+    bottom: 0;
+    padding: 32px 0;
+    background-color: #fff;
   }
 
   &__buttons > &__button {
