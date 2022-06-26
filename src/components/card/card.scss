@@ -51,6 +51,11 @@
     background-color: #fff;
     border: 1px solid #000;
   }
+
+  &__description ul,
+  &__description li {
+    list-style: inherit;
+  }
 }
 
 .cart {
