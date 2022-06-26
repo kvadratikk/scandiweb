@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.scss';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
 
 import { ApolloProvider } from '@apollo/client';
 import client from './core/graphql/client';
@@ -17,5 +16,3 @@ root.render(
     </ApolloProvider>
   </Provider>
 );
-
-reportWebVitals();
